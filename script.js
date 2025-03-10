@@ -83,7 +83,7 @@ const recipes = [
         ],
         portionWeight: "290-330 г (сырая), 270 г (готовая)",
         cookingTime: "2 часа при 200°C (парогенератор)",
-        isFixed: true
+        isFixed: false 
     },
     {
         name: "Ростбиф Маринад ПФ",
