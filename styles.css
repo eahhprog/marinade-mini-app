@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8e8d8; /* Кремовый фон */
+    color: #3c2a1d; /* Тёмный текст */
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff8e7; /* Светлый фон карточки */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень */
+}
+h1 {
+    color: #4a2f1e; /* Тёмно-коричневый */
+    text-align: center;
+}
+select, input, button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #9a2e2e; /* Бордовый */
+    box-sizing: border-box;
+}
+button {
+    background-color: #9a2e2e; /* Бордовый */
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #7a2424; /* Темнее при наведении */
+}
+#result {
+    background: #f8e8d8;
+    padding: 10px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+}
