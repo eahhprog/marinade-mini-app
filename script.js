@@ -1,6 +1,4 @@
-// Данные рецептов (пример с несколькими, добавь все свои)
-const recipes = [
-    // Данные рецептов
+// Данные рецептов
 const recipes = [
     {
         name: "Котлета на бургер ПФ",
@@ -195,10 +193,31 @@ const recipes = [
         baseWeight: 1.0,
         ingredients: [
             { name: "Говяжья вырезка зачищ", amount: 1.000, unit: "кг" },
-            { name:
+            { name: "Зелень Тимьян", amount: 0.003, unit: "кг" },
+            { name: "Зелень Розмарин", amount: 0.003, unit: "кг" },
+            { name: "Масло чесночное ПФ", amount: 0.015, unit: "л" },
+            { name: "Соль", amount: 0.010, unit: "кг" },
+            { name: "Специя Перец чёрный", amount: 0.001, unit: "кг" },
+            { name: "Соус соевый", amount: 0.010, unit: "л" }
+        ],
+        cookingTime: "1.5 часа при 54°C (вакуумировать без зелени)"
+    },
+    {
+        name: "Фарш на Бифштекс ПФ",
+        baseWeight: 1.0,
+        ingredients: [
+            { name: "Фарш говяжий", amount: 1.000, unit: "кг" },
+            { name: "Зелень Тимьян", amount: 0.007, unit: "кг" },
+            { name: "Соль", amount: 0.015, unit: "кг" },
+            { name: "Специя Перец чёрный", amount: 0.003, unit: "кг" },
+            { name: "Жир говяжий/свиной", amount: 0.150, unit: "кг" },
+            { name: "Вода", amount: 0.100, unit: "л" }
+        ],
+        portionWeight: "190 г"
+    }
 ];
 
-// Заполняем выпадающий список
+// Заполняем выпадающий список рецептов
 const select = document.getElementById("recipe-select");
 recipes.forEach((recipe, index) => {
     const option = document.createElement("option");
@@ -213,17 +232,29 @@ function calculate() {
     const recipe = recipes[recipeIndex];
     const input = parseFloat(document.getElementById("input-value").value) || 0;
 
-    let factor = recipe.portionWeight && recipe.baseWeight === 1.0 ? input : input / recipe.baseWeight;
-    const ingredientsText = recipe.ingredients.map(ingr => {
-        const scaledAmount = ingr.amount * factor;
-        return `${ingr.name}: ${scaledAmount.toFixed(3)} ${ingr.unit}`;
-    }).join("\n");
-
-    const resultText = `Результат для ${recipe.name}:\n${ingredientsText}` +
-        (recipe.portionWeight ? `\nВес порции: ${recipe.portionWeight}` : "");
-    document.getElementById("result").textContent = resultText;
+    if (recipe.isFixed) {
+        // Для фиксированных рецептов (например, "Ребра свиные") просто отображаем
+        const ingredientsText = recipe.ingredients.map(ingr => {
+            return `${ingr.name}: ${ingr.amount} ${ingr.unit}`;
+        }).join("\n");
+        const resultText = `Рецепт:\n${ingredientsText}` +
+            (recipe.portionWeight ? `\nВес порции: ${recipe.portionWeight}` : "") +
+            (recipe.cookingTime ? `\nВремя приготовления: ${recipe.cookingTime}` : "");
+        document.getElementById("result").textContent = resultText;
+    } else {
+        // Расчёт для остальных рецептов
+        const factor = recipe.portionWeight && recipe.baseWeight === 1.0 ? input : input / recipe.baseWeight;
+        const ingredientsText = recipe.ingredients.map(ingr => {
+            const scaledAmount = ingr.amount * factor;
+            return `${ingr.name}: ${scaledAmount.toFixed(3)} ${ingr.unit}`;
+        }).join("\n");
+        const resultText = `Результат для ${recipe.name}:\n${ingredientsText}` +
+            (recipe.portionWeight ? `\nВес порции: ${recipe.portionWeight}` : "") +
+            (recipe.cookingTime ? `\nВремя приготовления: ${recipe.cookingTime}` : "");
+        document.getElementById("result").textContent = resultText;
+    }
 }
 
-// Интеграция с Telegram
+// Интеграция с Telegram Web App
 window.Telegram.WebApp.ready();
 window.Telegram.WebApp.expand();
