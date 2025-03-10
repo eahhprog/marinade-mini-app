@@ -72,7 +72,7 @@ const recipes = [
             { name: "Ребра свиные зачищ ПФ", amount: 10.000, unit: "кг" },
             { name: "Соус соевый", amount: 1.500, unit: "л" },
             { name: "Уксус бальзамик", amount: 0.400, unit: "л" },
-            { name: "Соус кетчуп", amount: 0.600, unit: "кг" },
+            { name: "Соус кетчуп", amount: 0.650, unit: "кг" },
             { name: "Чеснок очищенный ПФ", amount: 4.0, unit: "шт" },
             { name: "Апельсин", amount: 4.0, unit: "шт" },
             { name: "Специя Паприка копчёная", amount: 0.050, unit: "кг" },
